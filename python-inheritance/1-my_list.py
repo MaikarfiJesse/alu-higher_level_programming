@@ -1,15 +1,9 @@
 #!/usr/bin/python3
-"""
-contains the MyList class
-"""
+"""MyList class module- test cases in tests/1-my_list.txt"""
 
 
 class MyList(list):
-    """a subclass of list"""
-    def __init__(self):
-        """initializes the object"""
-        super().__init__()
-
+    """my own class: MyList, inherits from list"""
     def print_sorted(self):
-        """prints the sorted list"""
+        """print sorted list method"""
         print(sorted(self))
