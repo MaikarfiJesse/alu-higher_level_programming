@@ -1,15 +1,13 @@
 #!/usr/bin/python3
-"""Rectangle inherits from BaseGeometry
-"""
+"""module for Rectangle, class what inherits from BG - no test cases"""
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
-    """Rectangle data inherits from BaseGeometry
-    """
-
+    """class rectangle is a subclass of BG"""
     def __init__(self, width, height):
-        super().integer_validator("width", width)
-        super().integer_validator("height", height)
+        """init method"""
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
         self.__width = width
         self.__height = height
