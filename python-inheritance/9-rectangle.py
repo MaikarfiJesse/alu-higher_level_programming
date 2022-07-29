@@ -1,21 +1,51 @@
 #!/usr/bin/python3
-"""module for Rectangle, class what inherits from BG - no test cases"""
-BaseGeometry = __import__('7-base_geometry').BaseGeometry
+"""
+Module 9
+"""
+
+
+class BaseGeometry:
+    """creates a class BaseGeometry"""
+    def area(self):
+        """calculate the area
+        Raise:
+            Exception: area is not implemented
+        """
+        raise Exception("area() is not implemented")
+
+    def integer_validator(self, name, value):
+        """validates the value
+        Args:
+            name(str): name
+            value(int): value
+        Raises:
+            TypeError: if value is not type int
+            ValueError: if value is less than or equal to 0
+        """
+        if type(value) is not int:
+            raise TypeError("{:s} must be an integer".format(name))
+        if value <= 0:
+            raise ValueError("{:s} must be greater than 0".format(name))
 
 
 class Rectangle(BaseGeometry):
-    """class rectangle is a subclass of BG"""
+    """creates a subclass Rectangle of class BaseGeometry"""
     def __init__(self, width, height):
-        """init method"""
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
+        """initialize attributes
+        Args:
+            width(int): width of Rectangle
+            height(int): height of Rectangle
+        """
+        BaseGeometry.__init__(self)
         self.__width = width
         self.__height = height
+        super().integer_validator("width", self.__width)
+        super().integer_validator("height", self.__height)
 
     def area(self):
-        """returns the area of rectangle"""
+        """calculates area"""
         return self.__width * self.__height
 
     def __str__(self):
-        """str rep method for rectangle"""
-        return "[Rectangle] " + str(self.__width) + "/" + str(self.__height)
+        """prints string"""
+        return "[Rectangle] {:d}/{:d}".format(self.__width, self.__height)
