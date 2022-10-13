@@ -1,5 +1,7 @@
 #!/usr/bin/node
-let list = require('./100-data.js').list;
+// write a script that an array and computes a new array
+let list = require('./100-data').list;
 console.log(list);
-let newList = list.map((x, index) => x * index);
-console.log(newList);
+let i = 0;
+list = list.map(x => x * i++);
+console.log(list);
