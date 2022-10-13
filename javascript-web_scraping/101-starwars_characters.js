@@ -1,27 +1,29 @@
 #!/usr/bin/node
+const movieId = process.argv.slice(2)[0];
 const request = require('request');
-const film = process.argv[2];
-let url = 'http://swapi.co/api/people/';
-function filmcharacters (film, url) {
-  request(url, function (err, response, body) {
-    if (err) {
-      console.log(err);
-    } else if (response.statusCode === 200) {
-      let jsonobj = JSON.parse(body);
-      let people = jsonobj.results;
-      for (let i in people) {
-        for (let j in people[i].films) {
-          if (people[i].films[j].includes(film)) {
-            console.log(people[i].name);
-          }
-        }
-      }
-      if (jsonobj.next !== null) {
-        filmcharacters(film, jsonobj.next);
-      }
+
+const filmsUrl = `https://swapi-api.hbtn.io/api/films/${movieId}`;
+
+function printCharacterName (characters, index) {
+  request(characters[index], (error, response, body) => {
+    if (error) {
+      console.log(error);
     } else {
-      console.log('An error occured. Status code: ' + response.statusCode);
+      const name = JSON.parse(body).name;
+      console.log(name);
+      if (index < characters.length - 1) {
+        printCharacterName(characters, index + 1);
+      }
     }
   });
 }
-filmcharacters(film, url);
+
+request(filmsUrl, (error, response, body) => {
+  if (error) {
+    console.log(error);
+  } else {
+    const parseData = JSON.parse(body);
+    const characters = parseData.characters;
+    printCharacterName(characters, 0);
+  }
+});
